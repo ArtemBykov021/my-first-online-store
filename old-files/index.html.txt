@@ -1,0 +1,21 @@
+!DOCTYPE html
+html lang=ru
+head
+    meta charset=UTF-8
+    titleМой первый сайтtitle
+head
+
+body
+
+    h1Мой первый сайтh1
+
+    pЯ начинаю изучать веб-разработку.p
+
+    h2Обо мнеh2
+
+    pЯ хочу научиться создавать сайты и зарабатывать на этом.p
+
+    buttonСвязаться со мнойbutton
+
+body
+html

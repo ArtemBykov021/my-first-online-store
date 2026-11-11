@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+<title>Мой первый сайт</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+    </head>
+    <meta charset="UTF-8">
+    <body>
+            <div class="scroll-button">↑</div>
+
+<header class="header">
+    <div class="logo">Мой сайт</div>
+
+    <button class="menu-toggle" type="button"
+    aria-label="Открыть меню"
+    aria-expanded="false">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+    </button>
+
+    <nav class="menu">
+        <a href="#home">Главная</a>
+        <a href="#catalog">Каталог</a>
+        <a href="#cart">Корзина</a>
+        <a href="#orders">Заказы</a>
+    </nav>
+</header>
+<main>
+    <section class="hero" id="home">
+        <div class="container">
+        <h1>Добро пожаловать на Мой сайт</h1>
+        <p>Это мой первый полноценный сайт.</p>
+        <a href="#about" id="moreButton">Узнать больше</a>
+        <button id="toggleButton">Показать / Скрыть текст</button>
+        <p id="message"></p>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="container">
+        <h2>О моем сайте</h2>
+        <p>Здесь я изучаю веб-разрабртку и создаю свои первые сайты.</p>
+        </div>
+    </section>
+    <section class="advantages">
+        <div class="container">
+        <div class="advantage">
+            <h2>HTML</h2>
+            <p>Создает структуру сайта.</p>
+        </div>
+        <div class="advantage">
+            <h2>CSS</h2>
+            <p>Отвесает за внешний вид.</p>
+        </div>
+        <div class="advantage">
+            <h2>JavaScript</h2>
+            <p>Добавляет интерактивность.</p>
+        </div>
+        </div>
+    </section>
+
+
+<label for="searchInput">Поиск товаров</label>
+<input type="text" id="searchInput" placeholder="Поиск карточки...">
+
+<label for="minPriceInput">Минимальная цена</label>
+<input type="number" id="minPriceInput" placeholder="Минимальная цена">
+
+<label for="maxPriceInput">Максимальная цена</label>
+<input type="number" id="maxPriceInput" placeholder="Максимальная цена">
+
+<button id="filterPriceButton">Фильтр по цене</button>
+<p id="cardsCount"></p>
+<button id="resetFiltersButton">Сбросить фильтры</button>
+<button id="sortButton">Сортировать по цене</button>
+<button id="sortNameButton">Сортировать по названию</button>
+<div class="edit-form">
+    <h2>Редактирование товара</h2>
+
+    <label for="nameInput">Новое название</label>
+    <input type="text" id="nameInput" placeholder="Новое название">
+
+    <label for="priceInput">Новая цена</label>
+    <input type="number" id="priceInput" placeholder="Новая цена">
+
+    <button id="saveButton">Сохранить</button>
+    <p id="editMessage"></p>
+</div>
+<div class="add-form">
+    <h2>Добавить карточку</h2>
+
+    <label for="addNameInput">Название товара</label>
+    <input type="text" id="addNameInput" placeholder="Название карточки">
+
+    <label for="addPriceInput">Цена товара</label>
+    <input type="number" id="addPriceInput" placeholder="Цена">
+
+    <label for="addColorInput">Цвет карточки</label>
+    <select id="addColorInput">
+        <option value="yellow">желтый</option>
+        <option value="green">зеленый</option>
+        <option value="red">красный</option>
+    </select>
+
+    <button id="addButton">Добавить карточку</button>
+    <p id="addMessage"></p>
+</div>
+<label for="imageUrlInput">Ссылка на изображение товара</label>
+<input
+    type="url"
+    id="imageUrlInput"
+    placeholder="Вставьте ссылку на изображение"
+>
+<div class="cart-info" id="cart">
+    <h2>Корзина</h2>
+    <p>Товаров в корзине: <span id="cartCount">0</span></p>
+    <div id="cartItems"></div>
+    <p>Общая стоимость: <span id="cartTotal">0</span> ₽</p>
+</div>
+<div class="checkout">
+    <h2>Оформление заказа</h2>
+    <form id="checkoutForm">
+        <label for="customerName">Ваше имя</label>
+        <input
+        type="text"
+        id="customerName"
+        placeholder="Введите имя"
+        required
+        >
+
+        <label for="customerPhone">Телефон</label>
+        <input
+        type="tel"
+        id="customerPhone"
+        placeholder="+7 900 000-00-00"
+        required
+        >
+        <label for="customerAddress">Адрес доставки</label>
+        <input
+        type="text"
+        id="customerAddress"
+        placeholder="Введите адрес"
+        required
+        >
+
+        <button type="submit">Оформить заказ</button>
+    </form>
+<p id="orderMessage"></p>
+</div>
+<div class="order-statistics">
+    <h2>Статистика заказов</h2>
+
+    <label for="statsPeriod">Период статистики:</label>
+
+    <select id="statsPeriod">
+        <option value="all">За всё время</option>
+        <option value="7">Последние 7 дней</option>
+        <option value="30">Последние 30 дней</option>
+    </select>
+
+    <div class="statistics-list">
+        <div class="stat-item">
+            <h3>Новые</h3>
+            <p id="newOrdersCount">0</p>
+        </div>
+
+        <div class="stat-item">
+            <h3>В обработке</h3>
+            <p id="processingOrdersCount">0</p>
+        </div>
+
+        <div class="stat-item">
+            <h3>Отправленные</h3>
+            <p id="shippedOrdersCount">0</p>
+        </div>
+
+        <div class="stat-item">
+            <h3>Завершенные</h3>
+            <p id="completedOrdersCount">0</p>
+        </div>
+
+        <div class="stat-item">
+            <h3>Отмененные</h3>
+            <p id="cancelledOrdersCount">0</p>
+        </div>
+    </div>
+
+    <div class="statistics-summary">
+
+    <div class="stat-item">
+        <h3>Всего заказов</h3>
+        <p id="totalOrdersCount">0</p>
+    </div>
+
+    <div class="stat-item">
+        <h3>Общая сумма</h3>
+        <p id="ordersTotalSum">0 ₽</p>
+    </div>
+
+    <div class="stat-item">
+        <h3>Средний чек</h3>
+        <p id="averageOrderValue">0 ₽</p>
+    </div>
+
+</div>
+</div>
+<div class="order-history" id="orders">
+    <h2>История заказов</h2>
+    <div id="orderHistory">
+        <p>Здесь пока нет заказов.</p>
+    </div>
+</div>
+<section class="cards" id="catalog">
+<div class="card card1" data-id="1">
+    <h2>Мой первый сайт</h2>
+    <img id="photo" src="photo.jpg" alt="Моя фотография" width="500">
+    <p>Эта моя первая карточка на сайте.</p>
+
+    <button class="delete-button">Удалить</button>
+    <div class="price"></div>
+    <a href="https://www.google.com">Открыть Google</a>
+</div>
+<div class="card card2" data-id="2">
+    <h2>Мой первый сайт</h2>
+    <img src="photo.jpg" alt="Моя фотография" width="500">
+    <p>Эта моя первая карточка на сайте.</p>
+
+    <button class="delete-button">Удалить</button>
+    <div class="price"></div>
+    <a href="https://www.google.com">Открыть Google</a>
+</div>
+<div class="card card3" data-id="3">
+    <h2>Мой первый сайт</h2>
+    <img src="photo.jpg" alt="Моя фотография" width="500">
+    <p>Эта моя первая карточка на сайте.</p>
+
+    <button class="delete-button">Удалить</button>
+    <div class="price"></div>
+    <a href="https://www.google.com">Открыть Google</a>
+</div>
+</section>
+<section class="info">
+    <div>
+        <h3>HTML</h3>
+        <p>Создает структуру сайта.</p>
+    </div>
+    <div>
+        <h3>CSS</h3>
+        <p>Отвечает за внешний вид.</p>
+    </div>
+    <div>
+        <h3>JavaScript</h3>
+        <p>Добавляет интерактивность.</p>
+    </div>
+</section>
+</main>
+<footer class="footer">
+    <p>© 2026 Мой первый сайт</p>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>
