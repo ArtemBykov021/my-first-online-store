@@ -1,8 +1,11 @@
-
+// ==================================
+// 1. Элементы HTML
+// ==================================
     const button = document.querySelector("#moreButton");
 const message = document.getElementById("message");
 const photo = document.getElementById("photo");
 const imageUrlInput = document.querySelector("#imageUrlInput");
+const toggleButton = document.getElementById("toggleButton");
 
 button.addEventListener("click", function(event) {
     event.preventDefault();
@@ -10,8 +13,6 @@ button.addEventListener("click", function(event) {
     message.classList.remove("hidden");
     photo.setAttribute("src", "photo2.jpg");
 });
-
-const toggleButton = document.getElementById("toggleButton");
 
 toggleButton.addEventListener("click", function(){
     message.classList.toggle("hidden");
@@ -259,10 +260,10 @@ resetFiltersButton.addEventListener("click", function() {
     maxPriceInput.value = "";
     searchCards();
 });
-
-
-
-const container = document.querySelector(".cards");
+// ==================================
+// 2. Данные магазина
+// ==================================
+const container = cardsContainer;
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
@@ -311,7 +312,7 @@ statsPeriodSelect.addEventListener("change", function() {
     updateOrderStats();
 });
 
-function getOrderTimestemp(order) {
+function getOrderTimestamp(order) {
     if (!order.createdAt) {
         return null;
     }
@@ -331,7 +332,7 @@ function getOrdersByPeriod(days) {
     const periodStart = now - days * 24 * 60 * 60 * 1000;
 
     return orders.filter(function(order) {
-        const orderTime = getOrderTimestemp(order);
+        const orderTime = getOrderTimestamp(order);
 
         return orderTime !== null && orderTime >= periodStart;
     });
@@ -590,7 +591,7 @@ renderCards();
 searchCards();
 });
 
-function createCard(cardData, index){
+function createCard(cardData) {
 
     const card = document.createElement("div");
 
@@ -656,7 +657,7 @@ function renderCards() {
     container.innerHTML = "";
 
     cardsData.forEach(function(item, index) {
-        const card = createCard(item, index);
+        const card = createCard(item);
         container.append(card);
     });
 
