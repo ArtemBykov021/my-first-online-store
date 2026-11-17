@@ -22,28 +22,6 @@ let cards = document.querySelectorAll(".card");
 
 const cardsContainer = document.querySelector(".cards");
 
-cardsContainer.addEventListener("click", function(event) {
-    if (event.target.classList.contains("delete-button")) {
-        const card = event.target.closest(".card");
-        const cardId = Number(card.dataset.id);
-
-        const cardIndex = cardsData.findIndex(function(item) {
-            return item.id === cardId;
-        });
-
-        if (cardIndex === -1) {
-            return;
-        }
-
-        cardsData.splice(cardIndex, 1);
-
-        saveCards();
-        renderCards();
-        searchCards();
-
-        return;
-    }
-});
 
 let selectedCardId = null;
 
@@ -148,20 +126,6 @@ saveButton.addEventListener("click", function() {
     editMessage.style.color = "green";
 });
 
-cardsContainer.addEventListener("click", function(event){
-
-    if(event.target.classList.contains("delete-button")){
-        return;
-    }
-
-    const clickedCard = event.target.closest(".card");
-
-    if(clickedCard){
-        selectedCardId = Number(clickedCard.dataset.id);
-    
-    }
-
-});
 
 const defaultCards = [
     {
@@ -656,7 +620,7 @@ function addCard(cardData) {
 function renderCards() {
     container.innerHTML = "";
 
-    cardsData.forEach(function(item, index) {
+    cardsData.forEach(function(item) {
         const card = createCard(item);
         container.append(card);
     });
@@ -671,24 +635,64 @@ renderCart();
 updateCartCount();
 renderOrderHistory();
 
-container.addEventListener("click", function(event){
-    if(event.target.classList.contains("cart-button")) {
-        const card = event.target.closest(".card");
+cardsContainer.addEventListener("click", function(event) {
+
+    // 1. Удаление товара
+    const deleteButton = event.target.closest(".delete-button");
+
+    if (deleteButton) {
+        const card = deleteButton.closest(".card");
         const cardId = Number(card.dataset.id);
 
-        const product = cardsData.find(function(item){
+        const cardIndex = cardsData.findIndex(function(item) {
+            return item.id === cardId;
+        });
+
+        if (cardIndex === -1) {
+            return;
+        }
+
+        cardsData.splice(cardIndex, 1);
+
+        saveCards();
+        renderCards();
+        searchCards();
+
+        return;
+    }
+
+    // 2. Добавление товара в корзину
+    const cartButton = event.target.closest(".cart-button");
+
+    if (cartButton) {
+        const card = cartButton.closest(".card");
+        const cardId = Number(card.dataset.id);
+
+        const product = cardsData.find(function(item) {
             return Number(item.id) === cardId;
         });
+
         if (!product) {
             return;
         }
+
         cart.push(product);
 
-                localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem("cart", JSON.stringify(cart));
 
         updateCartCount();
         renderCart();
+
+        return;
     }
+
+    // 3. Выбор карточки для редактирования
+    const clickedCard = event.target.closest(".card");
+
+    if (clickedCard) {
+        selectedCardId = Number(clickedCard.dataset.id);
+    }
+
 });
 
 cartItems.addEventListener("click", function(event) {
