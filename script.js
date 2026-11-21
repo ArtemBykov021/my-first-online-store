@@ -1,4 +1,5 @@
 import { createCard } from "./modules/cards.js";
+import { renderCart, updateCartCount } from "./modules/cart.js";
 // ==================================
 // 1. Элементы HTML
 // ==================================
@@ -236,34 +237,6 @@ const orderHistory = document.querySelector("#orderHistory");
 const cartCount = document.querySelector("#cartCount");
 const cartItems = document.querySelector("#cartItems");
 const cartTotal = document.querySelector("#cartTotal");
-function updateCartCount() {
-    cartCount.textContent = cart.length;
-}
-
-function renderCart() {
-    cartItems.innerHTML = "";
-
-    let total = 0;
-
-    cart.forEach(function(product) {
-       
-const item = document.createElement("p");
-
-item.textContent = product.name + " — " + product.price + " ₽ ";
-
-const removeButton = document.createElement("button");
-removeButton.textContent = "Удалить";
-removeButton.classList.add("remove-cart-button");
-
-item.append(removeButton);
-cartItems.append(item);
-
-
-        total += Number(product.price);
-    });
-
-    cartTotal.textContent = total;
-};
 
 let selectedOrderStatus = "Все";
 
@@ -586,8 +559,8 @@ function renderCards() {
 
 
 renderCards();
-renderCart();
-updateCartCount();
+renderCart(cart, cartItems, cartTotal);
+updateCartCount(cart, cartCount);
 renderOrderHistory();
 
 cardsContainer.addEventListener("click", function(event) {
@@ -635,8 +608,8 @@ cardsContainer.addEventListener("click", function(event) {
 
         localStorage.setItem("cart", JSON.stringify(cart));
 
-        updateCartCount();
-        renderCart();
+        updateCartCount(cart, cartCount);
+        renderCart(cart, cartItems, cartTotal);
 
         return;
     }
@@ -659,8 +632,8 @@ cartItems.addEventListener("click", function(event) {
 
         localStorage.setItem("cart", JSON.stringify(cart));
 
-        updateCartCount();
-        renderCart();
+        updateCartCount(cart, cartCount);
+        renderCart(cart, cartItems, cartTotal);
     }
 });
 
@@ -744,8 +717,8 @@ checkoutForm.addEventListener("submit", function(event){
 
 localStorage.setItem("cart", JSON.stringify(cart));
 
-updateCartCount();
-renderCart();
+updateCartCount(cart, cartCount);
+renderCart(cart, cartItems, cartTotal);
 
 checkoutForm.reset();
 });
